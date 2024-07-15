@@ -18,5 +18,11 @@ console.log(buah);
 // buah = 'Jeruk';
 // console.log(buah);
 
+// Formating Variable Name
+// Choose one and do not mixed them up together
 
+const newSentence = 'asd'; // Camel Case
+const new_sentence = 'qwe'; // Snake Case
 
+console.log(newSentence);
+console.log(new_sentence);
