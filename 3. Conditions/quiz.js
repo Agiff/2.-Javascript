@@ -11,6 +11,34 @@ const melonPrice = 20000;
 const strawberryPrice = 25000;
 const avocadoPrice = 30000;
 
+let cheapest = Infinity; // To find the lowest use Infinity as the initial value
+let expensive = -Infinity; // To find the higheste use -Infinity as the initial value
+let cheapestFruit = "apple";
+
+if (grapePrice < cheapest) {
+  cheapestFruit = "grape";
+  cheapest = grapePrice;
+}
+
+if (melonPrice < cheapest) {
+  cheapestFruit = "melon";
+  cheapest = melonPrice;
+}
+
+if (strawberryPrice < cheapest) {
+  cheapestFruit = "strawberry";
+  cheapest = strawberryPrice;
+}
+
+if (avocadoPrice < cheapest) {
+  cheapestFruit = "avocado";
+  cheapest = avocadoPrice;
+}
+
+// console.log(
+//   `The cheapest fruit is ${cheapestFruit} and the price is ${cheapest}`
+// );
+
 /*
 Quiz 2:
 
@@ -20,10 +48,11 @@ Compare the currentDay with targetDay by using ternary. If the condition is
 - not fulfilled then print 'It's a weekday'
 */
 
-const targetDay = 'Saturday';
-const currentDay = 'Friday';
+const targetDay = "Saturday";
+const currentDay = "Friday";
 
-const result = 'your code here'
+const result = currentDay === targetDay ? "It's a weekend" : "It's a weekday";
+// console.log(result);
 
 /*
 Quiz 3: The Treasure Hunt (Using "AND")
@@ -45,6 +74,12 @@ Variables to start:
 let hasMap = true;
 let hasKey = true;
 
+if (hasMap === true && hasKey === true) {
+  console.log(`The secret door is open`);
+} else {
+  console.log(`You cannot open the secret door`);
+}
+
 /*
 Quiz 4: The Space Mission (Using "OR")
 Story:
@@ -62,5 +97,11 @@ Write a JavaScript if statement using the "OR" logical operator to check if at l
 Variables to start:
 */
 
-let navSystem = false;
-let commSystem = true;
+const navSystem = true;
+const commSystem = true;
+
+if (navSystem === true || commSystem === true) {
+  console.log(`We can landing successfuly`);
+} else {
+  console.log(`We cannot land yet`);
+}
