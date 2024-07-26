@@ -121,10 +121,6 @@ for (const fruits of words) {
   }
 }
 
-const word = 'apple';
-const upperCaseWord = word.toUpperCase();
-console.log(upperCaseWord);
-
 /*
 [1, 2, 3, 4, 5] --> [-1, -2, -3, -4, -5]
 [1, -2, 3, -4, 5] --> [-1, 2, -3, 4, -5]
@@ -146,3 +142,152 @@ for (const number of numbers) {
 
 console.log(tempArray);
 
+// Write a nested loop to print words with length greater than 4.
+
+/*
+const words = [
+  ['apple', 'banana', 'cherry'],
+  ['date', 'elderberry', 'fig'],
+  ['grape', 'honeydew', 'kiwi']
+];
+*/
+
+/* Expected Output:
+apple
+banana
+cherry
+elderberry
+grape
+honeydew
+*/
+
+// Ver 1
+for (const fruits of words) {
+  for (const fruit of fruits) {
+    if (fruit.length > 4) {
+      console.log(fruit);
+    }
+  }
+}
+
+// Ver 2
+for (let i = 0; i < words.length; i++) {
+  for (let j = 0; j < words[i].length; j++) {
+    if (words[i][j].length > 4) {
+      console.log(words[i][j]);
+    }
+  }
+}
+
+// Write a nested loop to count the number of words containing the letter 'a'.
+
+/* Expected Output:
+4
+*/
+
+let totalWords = 0;
+
+for (let i = 0; i < words.length; i++) {
+    for (let j = 0; j < words[i].length; j++) {
+        if (words[i][j].includes('a')) {
+            totalWords++;
+        }
+    }
+}
+
+console.log("Total kata yang mengandung huruf A :", totalWords); // Expected Output: 6
+
+// Write a nested loop to count the number of the letter 'a'.
+
+/* Expected Output:
+6
+*/
+
+console.log('_______________');
+
+let totalCharacter = 0;
+
+for (const fruits of words) {
+  for (const fruit of fruits) {
+    for (const character of fruit) {
+      if (character === 'a') {
+        totalCharacter += 1;
+      }
+    }
+  }
+}
+
+console.log(totalCharacter);
+
+// Write a nested loop to print each word in uppercase.
+
+/* Expected Output:
+APPLE
+BANANA
+CHERRY
+DATE
+ELDERBERRY
+FIG
+GRAPE
+HONEYDEW
+KIWI
+*/
+
+console.log('______________');
+
+for (const fruits of words) {
+  for (const fruit of fruits) {
+    console.log(fruit.toUpperCase());
+  }
+}
+
+// Write a nested loop to print words that start with a vowel.
+
+/* Expected Output:
+apple
+elderberry
+*/
+
+console.log('________________');
+
+const vowels = 'aieuo';
+
+for (const fruits of words) { // to loop array of arrays
+  for (const fruit of fruits) { // to loop array of strings
+    let wordFound = false;
+    const firstLetter = fruit[0];
+
+    for (const vowel of vowels) { // to loop aiueo
+      if (firstLetter === vowel) { // to compare firstletter with vowel
+        wordFound = true;
+      }
+    }
+
+    if (wordFound === true) { // check if wordFound has been changed
+      console.log(fruit);
+    }
+  }
+}
+
+// Write a nested loop to print words that has a vowel in it.
+
+// const vowels = 'aieuo';
+
+// for (const fruits of words) { // to loop array of arrays
+//   for (const fruit of fruits) { // to loop array of strings
+//     let wordFound = false;
+
+//     for (const character of fruit) {
+      
+//       for (const vowel of vowels) {
+//         if (character === vowel) {
+//           wordFound = true;
+//         }
+//       }
+//     }
+
+//     if (wordFound) {
+//       console.log(fruit);
+//     }
+//   }
+// }
