@@ -129,7 +129,21 @@ const employeeDB = [
   ]
 */
 
+// Ver 1
+const employeeEmails = [];
 
+for (const employee of employeeDB) {
+  employeeEmails.push(employee.contactInfo.email);
+}
+
+console.log(employeeEmails);
+
+// Ver 2 (map)
+const mappedEmployeeEmails = employeeDB.map((employee) => {
+  return employee.contactInfo.email
+})
+
+console.log(mappedEmployeeEmails);
 
 /*
   Quiz 2: List the names of all employees who have the skill "JavaScript".
@@ -138,16 +152,58 @@ const employeeDB = [
   ["Alice Johnson"]
 */
 
+// Ver 1
+const targetSkill = 'JavaScript';
+let javascriptEmployees = [];
 
+for (const employee of employeeDB) {
+  if (employee.skills.includes(targetSkill)) {
+    javascriptEmployees.push(employee.name);
+  }
+}
+
+console.log(javascriptEmployees);
+
+// Ver 2
+javascriptEmployees = [];
+
+for (const employee of employeeDB) {
+  let hasSkill = false;
+
+  for (const skill of employee.skills) {
+    if (targetSkill === skill) {
+      hasSkill = true;
+    }  
+  }
+
+  if (hasSkill) {
+    javascriptEmployees.push(employee.name);
+  }
+}
+
+console.log(javascriptEmployees);
 
 /*
   Quiz 3: How many unique skills are present in the "Marketing" department?
 
   Expected Output:
-  8 // ("SEO", "Content Marketing", "Social Media", "Email Marketing", "Google Analytics", "Brand Strategy", "Copywriting", "Creative Writing", "Editing")
+  9 // ("SEO", "Content Marketing", "Social Media", "Email Marketing", "Google Analytics", "Brand Strategy", "Copywriting", "Creative Writing", "Editing")
 */
 
+const uniqueSkills = [];
 
+for (const employee of employeeDB) { // Looping Employee
+  if (employee.department === 'Marketing') { // Filter Marketing Department Only
+    for (const skill of employee.skills) { // Looping Employee's Skills
+      if (!uniqueSkills.includes(skill)) { // Check if uniqueSkills has skill in it
+        uniqueSkills.push(skill);
+      }
+    }
+  }
+}
+
+console.log(uniqueSkills);
+console.log(uniqueSkills.length);
 
 /*
   Quiz 4: For each employee, combine their name and contactInfo into a new object with properties name and contact. The contact property should include both email and phone.
@@ -227,7 +283,34 @@ const employeeDB = [
   ]
 */
 
+// Ver 1
+const formattedEmployees = [];
 
+for (const employee of employeeDB) {
+  const newEmployee = {
+    name: employee.name,
+    contact: {
+      email: employee.contactInfo.email,
+      phone: employee.contactInfo.phone
+    }
+  }
+  formattedEmployees.push(newEmployee);
+}
+
+console.log(formattedEmployees);
+
+// Ver 2 (map)
+const newEmployees = employeeDB.map((employee) => {
+  return {
+    name: employee.name,
+    contact: {
+      email: employee.contactInfo.email,
+      phone: employee.contactInfo.phone
+    }
+  }
+})
+
+console.log(newEmployees);
 
 /*
   Quiz 5: Identify the employee with the most skills and provide their name and the number of skills they have.
@@ -239,7 +322,22 @@ const employeeDB = [
   }
 */
 
+let skillfulEmployee;
+let skillsCount = 0;
 
+for (const employee of employeeDB) {
+  if (employee.skills.length > skillsCount) {
+    skillsCount = employee.skills.length;
+    skillfulEmployee = employee;
+  }
+}
+
+const opEmployee = {
+  name: skillfulEmployee.name,
+  skillsCount: skillsCount
+}
+
+console.log(opEmployee);
 
 /*
   Quiz 6 (Bonus): Write a function called "findEmployeeById" that takes an "id" as a parameter and returns the employee object with that ID from the "employeeDB" array. 
@@ -258,7 +356,16 @@ const employeeDB = [
   }
 */
 
+function findEmployeeById(id) {
+  for (const employee of employeeDB) {
+    if (employee.id === id) {
+      return employee;
+    }
+  }
+}
 
+const selectedEmployee = findEmployeeById(4);
+console.log(selectedEmployee);
 
 /*
   Quiz 7 (Bonus): Write a function called "getEmployeesWithSkill" that takes a skill as a parameter and returns an array of employee names who possess that skill. Additionally, write another function called "getEmployeeContactsWithSkill" that takes a skill as a parameter and uses "getEmployeesWithSkill" to find employees with that skill. The "getEmployeeContactsWithSkill" function should return an array of objects containing the "name" and "contactInfo" (with "email" and "phone") of these employees.
@@ -294,3 +401,33 @@ const employeeDB = [
   ]
 */
 
+function getEmployeesWithSkill(skill) {
+  const tempArray = [];
+  for (const employee of employeeDB) {
+    if (employee.skills.includes(skill)) {
+      tempArray.push(employee.name);
+    }
+  }
+  return tempArray;
+}
+
+function getEmployeeContactsWithSkill(skill) {
+  const employeeNames = getEmployeesWithSkill(skill);
+  const result = [];
+
+  for (const name of employeeNames) {
+    for (const employee of employeeDB) {
+      if (name === employee.name) {
+        result.push({
+          name: employee.name,
+          contactInfo: employee.contactInfo
+        });
+      }
+    }
+  }
+
+  return result;
+}
+
+const targetEmployees = getEmployeeContactsWithSkill('Content Marketing');
+console.log(targetEmployees);
