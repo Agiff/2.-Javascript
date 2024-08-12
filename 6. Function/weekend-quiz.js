@@ -253,7 +253,24 @@ const users = [
   Isabella Clark
 */
 
+// Ver 1 (Normal Function)
 
+function logUserNames() {
+  for (const user of users) {
+    console.log(user.name);
+  }
+}
+
+logUserNames();
+
+// Ver 2 (Arrow Function)
+const logUserNamesArrow = () => {
+  for (const user of users) {
+    console.log(user.name);
+  }
+}
+
+logUserNamesArrow();
 
 /*
   Quiz 2: 
@@ -283,7 +300,33 @@ const users = [
   }
 */
 
+// Ver 1 (Looping)
 
+function getUserByEmail(email) {
+  let result;
+
+  for (const user of users) {
+    if (user.email === email) {
+      result = user;
+    }
+  }
+
+  return result;
+}
+
+const userFoundByEmail = getUserByEmail("jane.smith@example.com");
+console.log(userFoundByEmail);
+
+// Ver 2 (.find())
+const getUserByEmailArrow = (email) => {
+  const result = users.find((user) => {
+    return user.email === email;
+  });
+
+  return result;
+}
+
+console.log(getUserByEmailArrow("emily.johnson@example.com"));
 
 /*
   Quiz 3: 
@@ -367,7 +410,18 @@ const users = [
   ]
 */
 
+const filterUsersByAge = (minAge, maxAge) => {
+  const result = users.filter((user) => {
+    if (user.age >= minAge && user.age <= maxAge) {
+      return true;
+    }
+  })
 
+  return result;
+}
+
+const usersByAgeRange = filterUsersByAge(30, 32);
+console.log(usersByAgeRange);
 
 /*
   Quiz 4: 
@@ -388,7 +442,11 @@ const users = [
   ]
 */
 
+const sortedUsersByAge = users.sort((a, b) => {
+  return a.age - b.age;
+})
 
+console.log(sortedUsersByAge);
 
 /*
   Quiz 5: 
@@ -402,4 +460,19 @@ const users = [
   ]
 */
 
+// Ver 1 (Best Practice)
 
+const photographyUsers = users.filter((user) => user.interests.includes('photography')).map((user) => user.email);
+console.log(photographyUsers);
+
+// Ver 2 (Old Way)
+
+const photographyUsersOld = users.filter((user) => {
+  for (const interest of user.interests) {
+    if (interest === 'photography') {
+      return true;
+    }
+  }
+})
+
+console.log(photographyUsersOld);
