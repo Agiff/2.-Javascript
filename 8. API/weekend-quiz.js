@@ -11,6 +11,28 @@
     - Use `.then()` and `.catch()` to handle the resolved and rejected cases.
 */
 
+function simplePromise() {
+  return new Promise((resolve, reject) => {
+    const randomNumber = Math.random();
+    // console.log(randomNumber);
+    
+    setTimeout(() => {
+      if (randomNumber < 0.5) {
+        reject("Promise rejected!");
+      } else {
+        resolve("Promise resolved!");
+      }
+    }, 2000);
+  })
+}
+
+simplePromise()
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 
 
 /*
@@ -26,7 +48,28 @@
     - Implement `.finally()` to display a message "Operation complete" whether the promise is resolved or rejected.
 */
 
+function paramPromise(message) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (message) {
+        resolve(message);
+      } else {
+        reject("No message provided!");
+      }
+    }, 1000);
+  })
+}
 
+paramPromise('Hello World')
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    console.log("Operation complete");
+  })
 
 /*
   Quiz 3
@@ -39,9 +82,28 @@
     - Manipulate the data you get from the API before printing it.
     - Using other API than the pokemon we used is much better.
 */
+const fruit = 'apple'
 
+fetch(`https://www.fruityvice.com/api/fruit/${fruit}`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Something went wrong with the API');
+    }
 
+    return response.json();
+  })
+  .then((response) => {
+    const result = {
+      name: response.name,
+      nutritions: response.nutritions
+    }
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 
+  
 /*
   Quiz 4
 
@@ -54,4 +116,23 @@
     - Using other API than the pokemon we used is much better.
 */
 
+const getFruit = async (fruitName) => {
+  try {
+    const response = await fetch(`https://www.fruityvice.com/api/fruit/${fruitName}`);
 
+    if (!response.ok) {
+      throw new Error('Something went wrong with the API');
+    }
+
+    const fruit = await response.json();
+    const result = {
+      name: fruit.name,
+      nutritions: fruit.nutritions
+    }
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getFruit('grape');
