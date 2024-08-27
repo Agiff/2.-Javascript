@@ -22,3 +22,28 @@ var modeSwitch = document.querySelector('.mode-switch');
 modeSwitch.addEventListener('click', function () {                      document.documentElement.classList.toggle('light');
  modeSwitch.classList.toggle('active');
 });
+
+/*
+  Personalization
+*/
+
+import { userDb } from '../database/loginDb.js'
+
+const currentUserEmail = localStorage.getItem('loginEmail');
+
+const currentUser = userDb.find((user) => user.email === currentUserEmail);
+console.log(currentUser);
+
+const userName = document.querySelector('.account-info-name');
+userName.innerText = `${currentUser.firstName} ${currentUser.lastName}`
+
+/*
+  Logout Feature
+*/
+
+const logoutButton = document.querySelector('#logout-button');
+
+logoutButton.addEventListener('click', () => {
+  localStorage.removeItem('loginEmail');
+  window.location.href = 'login.html';
+})
